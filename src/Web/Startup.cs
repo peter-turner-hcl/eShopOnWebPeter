@@ -42,24 +42,8 @@ namespace Microsoft.eShopWeb.Web
 
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
-            // use in-memory database
-            ConfigureInMemoryDatabases(services);
-
             // use real database
-            // ConfigureProductionServices(services);
-        }
-
-        private void ConfigureInMemoryDatabases(IServiceCollection services)
-        {
-            // use in-memory database
-            services.AddDbContext<CatalogContext>(c =>
-                c.UseInMemoryDatabase("Catalog"));
-
-            // Add Identity DbContext
-            services.AddDbContext<AppIdentityDbContext>(options =>
-                options.UseInMemoryDatabase("Identity"));
-
-            ConfigureServices(services);
+            ConfigureProductionServices(services);
         }
 
         public void ConfigureProductionServices(IServiceCollection services)
@@ -240,6 +224,7 @@ namespace Microsoft.eShopWeb.Web
                     name: "default",
                     template: "{controller:slugify=Home}/{action:slugify=Index}/{id?}");
             });
+
         }
     }
 }
